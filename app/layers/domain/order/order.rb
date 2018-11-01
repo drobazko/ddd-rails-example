@@ -5,6 +5,15 @@ module Domain
 
       attribute :customer, :string # just a string because we are lazy
 
+      def fee
+        Fee.new(self.fee_amount, self.currency)
+      end
+
+      def fee=(fee)
+        self.fee_amount = fee.fee_amount
+        self.currency = fee.currency
+      end
+
       def add_product(product, quantity)
         raise Exceptions::BusinessException.new('Product already exists') if product_already_exists?(product)
 
